@@ -91,9 +91,9 @@ jobs:
           docker run --privileged --rm tonistiigi/binfmt --install all
           # docker pull $DOCKER_REPO:$DOCKER_TAG
           docker buildx create --use
-          docker buildx build .  --platform linux/amd64 --push --file Dockerfile --tag $DOCKER_REPO:$DOCKER_TAG \
-          && echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login -u ${{ secrets.ALIYUN_ACCOUNT }} --password-stdin registry.cn-beijing.aliyuncs.com
-          && docker buildx build .  --platform linux/amd64 --push --file Dockerfile --tag $ALIYUN_DOCKER_REPO:$DOCKER_TAG
+          docker buildx build .  --platform linux/amd64 --push --file Dockerfile --tag $DOCKER_REPO:$DOCKER_TAG
+          echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login -u ${{ secrets.ALIYUN_ACCOUNT }} --password-stdin registry.cn-beijing.aliyuncs.com
+          docker buildx build .  --platform linux/amd64 --push --file Dockerfile --tag $ALIYUN_DOCKER_REPO:$DOCKER_TAG
           # docker buildx build . --platform linux/arm64,linux/amd64 --push --file Dockerfile --tag $ALIYUN_DOCKER_REPO:$DOCKER_TAG --tag $DOCKER_REPO:$DOCKER_TAG
           docker buildx rm
   #     - name: Push image to Container Registry
