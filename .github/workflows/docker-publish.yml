@@ -65,8 +65,17 @@ jobs:
 
       - name: Log into Docker Hub Registry
         run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
-      - name: Log into aliyun Registry
-        run: echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login -u ${{ secrets.ALIYUN_ACCOUNT }} --password-stdin registry.cn-beijing.aliyuncs.com
+      
+      - name: Login to Aliyun Container Registry (ACR)
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: registry.cn-beijing.aliyuncs.com
+          region-id: cn-beijing  # 3
+          username: "${{ secrets.ALIYUN_ACCOUNT }}"
+          password: "${{ secrets.ALIYUN_PASSWORD }}"
+
+      # - name: Log into aliyun Registry
+      #   run: echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login -u ${{ secrets.ALIYUN_ACCOUNT }} --password-stdin registry.cn-beijing.aliyuncs.com
 
       - name: Build image
         run:  |
