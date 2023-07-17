@@ -48,7 +48,7 @@ jobs:
           docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
           # docker pull $DOCKER_REPO:$DOCKER_TAG
           #docker run --platform linux/arm64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
-          docker run --platform linux/amd64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
+          docker run --platform linux/amd64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
           docker run --rm -t arm64v8/ubuntu uname -m
           docker run --rm -t arm32v6/alpine uname -m
           docker run --rm -t ppc64le/debian uname -m
