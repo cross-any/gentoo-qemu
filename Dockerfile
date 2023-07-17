@@ -18,5 +18,5 @@ RUN USE="static-user" QEMU_SOFTMMU_TARGETS="" QEMU_USER_TARGETS="x86_64 loongarc
 FROM busybox
 COPY --from=build /qemu/ /
 ENTRYPOINT [ "/register" ]
-CMD [ "-p yes --reset" ]
+CMD [ "--reset -p yes" ]
 
