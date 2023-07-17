@@ -57,7 +57,7 @@ jobs:
           docker run --rm -t ppc64le/busybox uname -a
           docker run --rm -t i386/ubuntu uname -a
           docker run --rm -t crossany/crossany:mips64el-2023 /usr/mips64el-crossany-linux-gnuabi64/usr/bin/uname -a
-          docker run --platform linux/amd64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG /bin/find /
+          docker run --platform linux/amd64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG ls -lR /
           # docker run --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG /cross/localrepo/examples/test-all.sh
 
   # Push base image to GitHub Packages.
