@@ -45,10 +45,19 @@ jobs:
 
           echo DOCKER_REPO=$DOCKER_REPO
           echo DOCKER_TAG=$DOCKER_TAG
-          docker run --privileged --rm tonistiigi/binfmt --install all
+          docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
           # docker pull $DOCKER_REPO:$DOCKER_TAG
-          docker run --platform linux/arm64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
+          #docker run --platform linux/arm64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
           docker run --platform linux/amd64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG find /
+          docker run --rm -t arm64v8/ubuntu uname -m
+          docker run --rm -t arm32v6/alpine uname -m
+          docker run --rm -t ppc64le/debian uname -m
+          docker run --rm -t s390x/ubuntu uname -m
+          docker run --rm -t arm64v8/fedora uname -m
+          docker run --rm -t arm32v7/centos uname -m
+          docker run --rm -t ppc64le/busybox uname -m
+          docker run --rm -t i386/ubuntu uname -m
+          docker run --rm -t mips64el/debian uname -m
           # docker run --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG /cross/localrepo/examples/test-all.sh
 
   # Push base image to GitHub Packages.
