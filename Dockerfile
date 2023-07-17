@@ -8,12 +8,15 @@ FROM gentoo/stage3:systemd-20230710 as build
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 
 ENV FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox"
-# build mini gentoo
-RUN USE="static-user" QEMU_SOFTMMU_TARGETS="" QEMU_USER_TARGETS="x86_64 loongarch64 hexagon aarch64 aarch64_be alpha arm armeb cris hppa i386 m68k microblaze microblazeel mips mips64 mips64el mipsel mipsn32 mipsn32el nios2 or1k ppc ppc64 ppc64abi32 ppc64le riscv32 riscv64 s390x sh4 sh4eb sparc sparc32plus sparc64 tilegx xtensa xtensaeb"  emerge --tree   --autounmask-continue --autounmask=y --autounmask-write  -vn -j$(nproc) '>app-emulation/qemu-8'
 COPY /register.sh /register
 COPY /qemu-binfmt-conf.sh /usr/bin/
+# build qemu and tar to /root/qemu.tar
+RUN USE="static-user" QEMU_SOFTMMU_TARGETS="" QEMU_USER_TARGETS="x86_64 loongarch64 hexagon aarch64 aarch64_be alpha arm armeb cris hppa i386 m68k microblaze microblazeel mips mips64 mips64el mipsel mipsn32 mipsn32el nios2 or1k ppc ppc64 ppc64abi32 ppc64le riscv32 riscv64 s390x sh4 sh4eb sparc sparc32plus sparc64 tilegx xtensa xtensaeb"  emerge --tree   --autounmask-continue --autounmask=y --autounmask-write  -vn -j$(nproc) '>app-emulation/qemu-8' \
+    app-portage/gentoolkit && equery f -t qemu|grep file|cut -f2 -d\  |xargs tar cvf /root/qemu.tar /register /usr/bin/qemu-binfmt-conf.sh
+
+#create final image from busybox with uncompressing the /root/qemu.tar from previous build step
+FROM busybox
+ADD --from=build /root/qemu.tar /
 ENTRYPOINT [ "/register" ]
 CMD [ "-p yes --reset" ]
-# FROM busybox
-# COPY --from=build /mini/ /
 
