@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.5.3
 
       - name: Run tests
         run: |
@@ -67,7 +67,7 @@ jobs:
     if: github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]')||contains(github.event.head_commit.message, '[pushi-base]'))
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.5.3
 
       - name: clean config
         run:  git config  --unset http.https://github.com/.extraheader
@@ -146,7 +146,7 @@ jobs:
   #   if: (!cancelled() && !failure()) && github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]') || contains(github.event.head_commit.message, '[push-mips64el]'))
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
       
   #     - name: Log into Docker Hub Registry
   #       run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
@@ -173,7 +173,7 @@ jobs:
   #   if: (!cancelled() && !failure()) && github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]') || contains(github.event.head_commit.message, '[push-aarch64]'))
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
       
   #     - name: Log into Docker Hub Registry
   #       run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
@@ -200,7 +200,7 @@ jobs:
   #   if: (!cancelled() && !failure()) && github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]') || contains(github.event.head_commit.message, '[push-x86_64]'))
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
       
   #     - name: Log into Docker Hub Registry
   #       run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
@@ -227,7 +227,7 @@ jobs:
   #   if: (!cancelled() && !failure()) && github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]') || contains(github.event.head_commit.message, '[push-riscv64]'))
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
       
   #     - name: Log into Docker Hub Registry
   #       run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
@@ -254,7 +254,7 @@ jobs:
   #   if: (!cancelled() && !failure()) && github.event_name == 'push' && (contains(github.event.head_commit.message, '[push]') || contains(github.event.head_commit.message, '[push-loongarch64]'))
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
       
   #     - name: Log into Docker Hub Registry
   #       run: echo "${{ secrets.HUB_PASSWORD }}" | docker login -u ${{ secrets.HUB_ACCOUNT }} --password-stdin
@@ -280,7 +280,7 @@ jobs:
   #   needs: push_x86_64  
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
         
   #     - name: Run x86_64 tests
   #       run: |
@@ -305,7 +305,7 @@ jobs:
   #   needs: push_aarch64  
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
         
   #     - name: Run aarch64 tests
   #       run: |
@@ -330,7 +330,7 @@ jobs:
   #   needs: push_mips64el  
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
         
   #     - name: Run mips64el tests
   #       run: |
@@ -355,7 +355,7 @@ jobs:
   #   needs: push_riscv64  
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
         
   #     - name: Run riscv64 tests
   #       run: |
@@ -380,7 +380,7 @@ jobs:
   #   needs: push_loongarch64  
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3.5.3
         
   #     - name: Run loongarch64 tests
   #       run: |
