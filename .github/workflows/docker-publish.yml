@@ -81,11 +81,10 @@ jobs:
           # Use Docker `latest` tag convention
           [ "$DOCKER_TAG" == "main" ] && DOCKER_TAG=latest
 
-          DOCKER_TAG=$DOCKER_TAG-arm64
           echo DOCKER_REPO=$DOCKER_REPO
           echo DOCKER_TAG=$DOCKER_TAG
-          # docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
-          # docker pull $DOCKER_REPO:$DOCKER_TAG
+          docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
+          DOCKER_TAG=$DOCKER_TAG-arm64
           docker run --platform linux/arm64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c find /
           docker run --platform linux/arm64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c uname -a
 

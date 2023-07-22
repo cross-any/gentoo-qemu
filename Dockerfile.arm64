@@ -3,6 +3,7 @@ ENV crossenv="aarch64-crossany-linux-gnu"
 ENV FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox"
 # build qemu and tar to /qemu/
 RUN nativerun emerge --tree   --autounmask-continue --autounmask=y --autounmask-write  -v -j$(nproc)  app-portage/gentoolkit
+RUN /bin/mv /usr/$crossenv/bin/*sh /usr/$crossenv/usr/bin/backup
 RUN USE="static-user" PYTHON_TARGETS="python3_11" QEMU_SOFTMMU_TARGETS="" QEMU_USER_TARGETS="x86_64 loongarch64 hexagon aarch64 aarch64_be alpha arm armeb cris hppa i386 m68k microblaze microblazeel mips mips64 mips64el mipsel mipsn32 mipsn32el nios2 or1k ppc ppc64 ppc64abi32 ppc64le riscv32 riscv64 s390x sh4 sh4eb sparc sparc32plus sparc64 tilegx xtensa xtensaeb"  \
     /crossenv emerge --tree   --autounmask-continue --autounmask=y --autounmask-write  -vn -j$(nproc) '>app-emulation/qemu-8' \
     && mkdir -p /qemu && cd /usr/aarch64-crossany-linux-gnu \
