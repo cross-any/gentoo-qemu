@@ -86,8 +86,8 @@ jobs:
           echo DOCKER_TAG=$DOCKER_TAG
           # docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
           # docker pull $DOCKER_REPO:$DOCKER_TAG
-          docker run --platform linux/arm64 --entrypoint --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c find /
-          docker run --platform linux/arm64 --entrypoint --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c uname -a
+          docker run --platform linux/arm64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c find /
+          docker run --platform linux/arm64 --entrypoint sh --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c uname -a
 
   # Push base image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
