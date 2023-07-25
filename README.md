@@ -10,7 +10,6 @@ Use aliyun if docker hub is slow for you:
 ```
 docker run -ti --rm --privileged crossany/qemu
 ```
-```
 # Run it on different architeture cpu  
 ```
 docker run -ti --rm --privileged crossany/qemu
