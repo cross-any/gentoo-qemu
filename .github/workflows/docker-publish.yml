@@ -276,8 +276,8 @@ jobs:
           echo DOCKER_TAG=$DOCKER_TAG
           docker run --privileged --rm $DOCKER_REPO:$DOCKER_TAG
           # docker pull $DOCKER_REPO:$DOCKER_TAG
-          docker run --platform linux/arm64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG uname -a
-          docker run --platform linux/amd64 --rm -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG uname -a
+          docker run --platform linux/arm64 --rm --entrypoint sh -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c uname -a
+          docker run --platform linux/amd64 --rm --entrypoint sh -v $PWD:/cross/localrepo $DOCKER_REPO:$DOCKER_TAG -c uname -a
 
 
 
